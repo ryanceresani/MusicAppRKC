@@ -31,7 +31,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
-
+            <td>
+                @Html.DisplayFor(modelItem => item.Artist.Name)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Genre.Name)
             </td>

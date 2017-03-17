@@ -37,6 +37,7 @@ namespace MusicApp2017.Controllers
                 //.Include(g => g.Name); 
             var genre = await genreContext
                 .SingleOrDefaultAsync(m => m.GenreID == id);
+            ViewData["Albums"] = _context.Albums.Where(a => a.GenreID == id).ToList();
             if (genre == null)
             {
                 return NotFound();
@@ -56,17 +57,15 @@ namespace MusicApp2017.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("AlbumID,Title,ArtistID,GenreID,Likes")] Album album)
+        public async Task<IActionResult> Create([Bind("GenreID,Name,Likes")] Genre genre)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(album);
+                _context.Add(genre);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewData["ArtistID"] = new SelectList(_context.Artists, "ArtistID", "Name", album.ArtistID);
-            ViewData["GenreID"] = new SelectList(_context.Genres, "GenreID", "Name", album.GenreID);
-            return View(album);
+            return View(genre);
         }
 
         // GET: Albums/Edit/5
@@ -77,14 +76,12 @@ namespace MusicApp2017.Controllers
                 return NotFound();
             }
 
-            var album = await _context.Albums.SingleOrDefaultAsync(m => m.AlbumID == id);
-            if (album == null)
+            var genre = await _context.Genres.SingleOrDefaultAsync(m => m.GenreID == id);
+            if (genre == null)
             {
                 return NotFound();
             }
-            ViewData["ArtistID"] = new SelectList(_context.Artists, "ArtistID", "Name", album.ArtistID);
-            ViewData["GenreID"] = new SelectList(_context.Genres, "GenreID", "Name", album.GenreID);
-            return View(album);
+            return View(genre);
         }
 
         // POST: Albums/Edit/5

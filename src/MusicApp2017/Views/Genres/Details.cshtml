@@ -1,35 +1,32 @@
-@model MusicApp2017.Models.Album
+@model MusicApp2017.Models.Genre
 
 @{
     ViewData["Title"] = "Details";
 }
 
-<h3>Album Details</h3>
+<h3>Genre Details</h3>
 
 <div>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Title)
+            @Html.DisplayNameFor(model => model.Name)
         </dt>
         <dd>
-            @Model.Title
+            @Model.Name
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Artist)
+            Albums
         </dt>
-        <dd>
-            @Model.Artist.Name
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Genre)
-        </dt>
-        <dd>
-            @Model.Genre.Name
-        </dd>
+        @foreach (var a in ViewBag.Albums)
+        {
+            <dd>
+                <a asp-Controller="Albums" asp-Action="Details" asp-route-id="@a.AlbumID">@a.Title</a>
+            </dd>
+        }
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.AlbumID">Edit</a> |
+    <a asp-action="Edit" asp-route-id="@Model.GenreID">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>

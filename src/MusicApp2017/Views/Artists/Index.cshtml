@@ -1,13 +1,13 @@
-@model IEnumerable<MusicApp2017.Models.Genre>
+@model IEnumerable<MusicApp2017.Models.Artist>
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h2>Genre Index</h2>
+<h2>Artist Index</h2>
 
 <p>
-    <a class="btn btn-info" asp-action="Create">Create New Genre</a>
+    <a class="btn btn-info" asp-action="Create">Create New Artist</a>
 </p>
 <table class="table">
     <thead>
@@ -25,8 +25,8 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.GenreID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.GenreID">Details</a> 
+                <a asp-action="Edit" asp-route-id="@item.ArtistID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ArtistID">Details</a> 
             </td>
         </tr>
 }

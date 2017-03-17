@@ -19,13 +19,22 @@
             @Html.DisplayNameFor(model => model.Artist)
         </dt>
         <dd>
-            @Model.Artist.Name
+            <a asp-Controller="Artists" asp-Action="Details" asp-route-id="@Model.ArtistID">@Model.Artist.Name</a>
         </dd>
+        @if (Model.Artist.Bio != null)
+        {
+            <dt>
+               Artist @Html.DisplayNameFor(model => model.Artist.Bio)
+            </dt>
+            <dd>
+                @Model.Artist.Bio
+            </dd>
+        }
         <dt>
             @Html.DisplayNameFor(model => model.Genre)
         </dt>
         <dd>
-            @Model.Genre.Name
+            <a asp-Controller="Genres" asp-Action="Details" asp-route-id="@Model.GenreID">@Model.Genre.Name</a>
         </dd>
     </dl>
 </div>

@@ -59,11 +59,17 @@ namespace MusicApp2017.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("GenreID,Name,Likes")] Genre genre)
         {
-            if (ModelState.IsValid)
+            if (!_context.Genres.Any(g => g.Name == genre.Name)){
+                if (ModelState.IsValid)
+                {
+                    _context.Add(genre);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction("Index");
+                }
+            }
+            else
             {
-                _context.Add(genre);
-                await _context.SaveChangesAsync();
-                return RedirectToAction("Index");
+                ViewData["Error"] = "Duplicate value not added";
             }
             return View(genre);
         }
@@ -95,26 +101,31 @@ namespace MusicApp2017.Controllers
             {
                 return NotFound();
             }
-
-            if (ModelState.IsValid)
+            if (!_context.Genres.Any(g => g.Name == genre.Name)) { 
+                if (ModelState.IsValid)
+                {
+                    try
+                    {
+                        _context.Update(genre);
+                        await _context.SaveChangesAsync();
+                    }
+                    catch (DbUpdateConcurrencyException)
+                    {
+                        if (!GenreExists(genre.GenreID))
+                        {
+                            return NotFound();
+                        }
+                        else
+                        {
+                            throw;
+                        }
+                    }
+                    return RedirectToAction("Index");
+                }
+            }
+            else
             {
-                try
-                {
-                    _context.Update(genre);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!GenreExists(genre.GenreID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction("Index");
+                ViewData["Error"] = "Duplicate value not added";
             }
             return View(genre);
         }

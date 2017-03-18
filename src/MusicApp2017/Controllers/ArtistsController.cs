@@ -59,11 +59,18 @@ namespace MusicApp2017.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ArtistID,Name,Bio,Likes")] Artist artist)
         {
-            if (ModelState.IsValid)
+            if (!_context.Artists.Any(a => a.Name == artist.Name))
             {
-                _context.Add(artist);
-                await _context.SaveChangesAsync();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    _context.Add(artist);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction("Index");
+                }
+            }
+            else
+            {
+                ViewData["Error"] = "Duplicate value not added";
             }
             return View(artist);
         }
@@ -95,28 +102,34 @@ namespace MusicApp2017.Controllers
             {
                 return NotFound();
             }
-
-            if (ModelState.IsValid)
+            if (!_context.Artists.Any(a => a.Name == artist.Name))
             {
-                try
+                if (ModelState.IsValid)
                 {
-                    _context.Update(artist);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ArtistExists(artist.ArtistID))
+                    try
                     {
-                        return NotFound();
+                        _context.Update(artist);
+                        await _context.SaveChangesAsync();
                     }
-                    else
+                    catch (DbUpdateConcurrencyException)
                     {
-                        throw;
+                        if (!ArtistExists(artist.ArtistID))
+                        {
+                            return NotFound();
+                        }
+                        else
+                        {
+                            throw;
+                        }
                     }
+                    return RedirectToAction("Index");
                 }
-                return RedirectToAction("Index");
             }
-            return View(artist);
+            else
+            {
+                ViewData["Error"] = "Duplicate value not added";
+            }
+                return View(artist);
         }
         private bool ArtistExists(int id)
         {

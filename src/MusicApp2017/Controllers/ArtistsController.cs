@@ -102,7 +102,7 @@ namespace MusicApp2017.Controllers
             {
                 return NotFound();
             }
-            if (!_context.Artists.Any(a => a.Name == artist.Name))
+            if (!_context.Artists.Any(a => a.Name == artist.Name && a.ArtistID != id))
             {
                 if (ModelState.IsValid)
                 {
@@ -127,7 +127,7 @@ namespace MusicApp2017.Controllers
             }
             else
             {
-                ViewData["Error"] = "Duplicate value not added";
+                ViewData["Error"] = "Cannot edit Artist name to that of another artist.";
             }
                 return View(artist);
         }

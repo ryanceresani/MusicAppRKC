@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
-namespace MVCDemo.Models
+namespace MusicApp2017.Models
 {
     public class ApplicationUser : IdentityUser
     {

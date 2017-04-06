@@ -3,11 +3,11 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Options;
-using MVCDemo.Models;
-using MVCDemo.Models.AccountViewModels;
+using MusicApp2017.Models;
+using MusicApp2017.Models.AccountViewModels;
 using Microsoft.AspNetCore.Identity;
 
-namespace MVCDemo.Controllers
+namespace MusicApp2017.Controllers
 {
     [Authorize]
     public class AccountController : Controller

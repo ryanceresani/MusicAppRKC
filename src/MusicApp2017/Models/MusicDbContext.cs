@@ -5,7 +5,6 @@ namespace MusicApp2017.Models
 {
     public class MusicDbContext : IdentityDbContext<ApplicationUser>
     {
-
         public MusicDbContext(DbContextOptions<MusicDbContext> options) : base(options)
         {
         }

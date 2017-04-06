@@ -8,6 +8,12 @@
     <PackageTargetFallback>$(PackageTargetFallback);portable-net45+win8+wp8+wpa81;</PackageTargetFallback>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="wwwroot\lib\bootstrap\dist\css\bootstrap-theme.css" />
+    <Content Include="wwwroot\lib\bootstrap\dist\css\bootstrap-theme.css.map" />
+    <Content Include="wwwroot\lib\bootstrap\dist\css\bootstrap.css" />
+    <Content Include="wwwroot\lib\bootstrap\dist\css\bootstrap.css.map" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="1.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="1.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics" Version="1.0.1" />
@@ -19,7 +25,7 @@
     <PackageReference Include="microsoft.entityframeworkcore.tools" Version="1.1.0-preview4-final" />
     <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="1.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="1.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging" Version="1.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="1.1.1" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="1.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="1.0.0" />
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="1.0.0" />

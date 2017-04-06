@@ -35,10 +35,11 @@
                     <li><a asp-area="" asp-controller="Genres" asp-action="Index">Genres</a></li>
                     <li><a asp-area="" asp-controller="Artists" asp-action="Index">Artists</a></li>
                 </ul>
+                @await Html.PartialAsync("_LoginPartial")
             </div>
         </div>
-        @await Html.PartialAsync("_LoginPartial")
     </div>
+<br />
     <div class="container body-content">
         @RenderBody()
         <hr />

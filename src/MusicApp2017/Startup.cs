@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using MusicApp2017.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace MusicApp2017
 {
@@ -32,6 +33,20 @@ namespace MusicApp2017
             // Add framework services.
             services.AddDbContext<MusicDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+            .AddEntityFrameworkStores<MusicDbContext>()
+            .AddDefaultTokenProviders();
+
+            services.Configure<IdentityOptions>(options =>
+            {
+                // Password settings
+                options.Password.RequireDigit = true;
+                options.Password.RequiredLength = 5;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireLowercase = false;
+            });
 
             services.AddMvc();
         }

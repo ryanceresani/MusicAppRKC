@@ -15,16 +15,19 @@ namespace MusicApp2017.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly string _externalCookieScheme;
+        private readonly MusicDbContext _context;
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
-            IOptions<IdentityCookieOptions> identityCookieOptions
+            IOptions<IdentityCookieOptions> identityCookieOptions,
+            MusicDbContext context
            )
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _externalCookieScheme = identityCookieOptions.Value.ExternalCookieAuthenticationScheme;
+            _context = context;
          }
 
         //
@@ -80,6 +83,7 @@ namespace MusicApp2017.Controllers
         public IActionResult Register(string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
+            ViewData["GenreID"] = new SelectList(_context.Genres, "GenreID", "Name");
             return View();
         }
 
@@ -93,7 +97,7 @@ namespace MusicApp2017.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, FavoriteGenre = model.FavoriteGenre };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

@@ -68,7 +68,7 @@ namespace MusicApp2017
             }
 
             app.UseStaticFiles();
-
+            app.UseIdentity();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

@@ -22,6 +22,10 @@ namespace MusicApp2017.Models.AccountViewModels
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
-        public string ConfirmPassword { get; set; }
+        public string ConfirmPassword { get; set;}
+
+
+        [Display(Name = "Favorite Genre")]
+        public Genre FavoriteGenre { get; set; }
     }
 }

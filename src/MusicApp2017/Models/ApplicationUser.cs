@@ -9,7 +9,7 @@ namespace MusicApp2017.Models
     public class ApplicationUser : IdentityUser
     {
         // Define custom properties here
-        public Genre FavoriteGenre { set; get; }
+        public int FavoriteGenre { set; get; }
     }
 
 }

@@ -1,0 +1,57 @@
+﻿@model IEnumerable<MusicApp2017.Models.Album>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Album Index</h2>
+<p>- Displaying All Genres</p>
+<br />
+
+@if (ViewContext.HttpContext.User.Identity.IsAuthenticated)
+{
+    <a class="btn btn-primary" asp-action="Index">Dispaly Only Favorite Genre</a>
+}
+<br />
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Artist)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Genre)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Artist.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Genre.Name)
+                </td>
+                <td>
+                    <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.AlbumID">Edit</a>
+                    <a class="btn btn-info" asp-action="Details" asp-route-id="@item.AlbumID">Details</a>
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.AlbumID">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<p>
+    <a class="btn btn-info" asp-action="Create">Create New Album</a>
+</p>

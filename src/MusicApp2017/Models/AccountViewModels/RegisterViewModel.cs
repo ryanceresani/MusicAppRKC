@@ -26,6 +26,6 @@ namespace MusicApp2017.Models.AccountViewModels
 
 
         [Display(Name = "Favorite Genre")]
-        public Genre FavoriteGenre { get; set; }
+        public int FavoriteGenre { get; set; }
     }
 }

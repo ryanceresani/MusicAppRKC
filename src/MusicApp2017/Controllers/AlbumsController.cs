@@ -7,23 +7,43 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MusicApp2017.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace MusicApp2017.Controllers
 {
     public class AlbumsController : Controller
     {
         private readonly MusicDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public AlbumsController(MusicDbContext context)
+        public AlbumsController(MusicDbContext context, UserManager<ApplicationUser> userManager)
         {
+            _userManager = userManager;
             _context = context;    
         }
 
-        // GET: Albums
+        // GET: 
         public async Task<IActionResult> Index()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                var user = await _userManager.GetUserAsync(User);
+                ViewData["FavoriteGenreName"] = _context.Genres.SingleOrDefault(g => g.GenreID == user.FavoriteGenre).Name;
+                var musicDbContext = _context.Albums.Include(a => a.Artist).Include(a => a.Genre).Where(a => a.GenreID == user.FavoriteGenre);
+                return View(await musicDbContext.ToListAsync());
+            }
+            else
+            {
+                var musicDbContext = _context.Albums.Include(a => a.Artist).Include(a => a.Genre);
+                return View("DisplayAll", await musicDbContext.ToListAsync());
+            }
+        }
+
+        // GET: Albums
+        public async Task<IActionResult> DisplayAll()
+        {
             var musicDbContext = _context.Albums.Include(a => a.Artist).Include(a => a.Genre);
-            return View(await musicDbContext.ToListAsync());
+                return View(await musicDbContext.ToListAsync());
         }
 
         // GET: Albums/Details/5

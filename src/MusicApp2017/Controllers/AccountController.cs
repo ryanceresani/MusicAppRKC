@@ -117,6 +117,49 @@ namespace MusicApp2017.Controllers
             return View(model);
         }
 
+        // GET: /Account/Edit
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> Edit(string returnUrl = null)
+        {
+            var currentUser = await _userManager.GetUserAsync(User);
+            var rvm = new EditViewModel { Email = currentUser.Email, FavoriteGenre = currentUser.FavoriteGenre };
+            ViewData["ReturnUrl"] = returnUrl;
+            ViewData["GenreID"] = new SelectList(_context.Genres, "GenreID", "Name");
+            return View(rvm);
+        }
+
+        //
+        // POST: /Account/Edit
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(EditViewModel model, string returnUrl = null)
+        {
+            ViewData["ReturnUrl"] = returnUrl;
+            if (ModelState.IsValid)
+            {
+                var currentUser = await _userManager.GetUserAsync(User);
+                currentUser.FavoriteGenre = model.FavoriteGenre;
+                var succeeded = await _userManager.UpdateAsync(currentUser);
+                if (succeeded.Succeeded)
+                {
+                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=532713
+                    // Send an email with this link
+                    //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                    //var callbackUrl = Url.Action(nameof(ConfirmEmail), "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
+                    //await _emailSender.SendEmailAsync(model.Email, "Confirm your account",
+                    //    $"Please confirm your account by clicking this link: <a href='{callbackUrl}'>link</a>");
+                    await _signInManager.SignInAsync(currentUser, isPersistent: false);
+                    return RedirectToLocal(returnUrl);
+                }
+                AddErrors(succeeded);
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
         // POST: /Account/Logout
         [HttpPost]
         [ValidateAntiForgeryToken]

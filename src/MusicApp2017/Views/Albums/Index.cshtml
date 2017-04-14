@@ -5,10 +5,10 @@
 }
 
 <h2>Album Index</h2>
-
-<p>
-    <a class="btn btn-info" asp-action="Create">Create New Album</a>
-</p>
+<p>- Displaying Only Favorite Genre: @ViewData["FavoriteGenreName"]</p>
+<br />
+<a class="btn btn-primary" asp-action="DisplayAll">Dispaly All Albums</a>
+<br />
 <table class="table">
     <thead>
         <tr>
@@ -46,3 +46,9 @@
 }
     </tbody>
 </table>
+
+<br />
+<p>
+    <a class="btn btn-info" asp-action="Create">Create New Album</a>
+</p>
+

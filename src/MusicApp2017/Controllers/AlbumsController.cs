@@ -85,8 +85,9 @@ namespace MusicApp2017.Controllers
             _context.Add(rating);
 
             await _context.SaveChangesAsync();
-
+            albumView = new AlbumViewModel(album);
             albumView.Score = GetAverageAlbumRating(album.AlbumID);
+            albumView.Count = GetRatingCount(album.AlbumID);
 
             return View("Details", albumView);
         }

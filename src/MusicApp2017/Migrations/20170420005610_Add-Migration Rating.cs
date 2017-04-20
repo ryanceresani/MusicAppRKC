@@ -16,7 +16,7 @@ namespace MusicApp2017.Migrations
                     RatingID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     AlbumID = table.Column<int>(nullable: false),
-                    Score = table.Column<int>(nullable: false)
+                    Score = table.Column<decimal>(nullable: false)
                 },
                 constraints: table =>
                 {

@@ -29,7 +29,7 @@ namespace MusicApp2017.Controllers
             {
                 var user = await _userManager.GetUserAsync(User);
                 ViewData["FavoriteGenreName"] = _context.Genres.SingleOrDefault(g => g.GenreID == user.FavoriteGenre).Name;
-                var musicDbContext = _context.Albums.Include(a => a.Artist).Include(a => a.Genre).Where(a => a.GenreID == user.FavoriteGenre);
+                var musicDbContext = _context.Albums.Include(a => a.Artist).Include(a => a.Genre).Where(a => a.GenreID == user.FavoriteGenre);  
                 return View(await musicDbContext.ToListAsync());
             }
             else
@@ -43,7 +43,7 @@ namespace MusicApp2017.Controllers
         public async Task<IActionResult> DisplayAll()
         {
             var musicDbContext = _context.Albums.Include(a => a.Artist).Include(a => a.Genre);
-                return View(await musicDbContext.ToListAsync());
+            return View(await musicDbContext.ToListAsync());
         }
 
         // GET: Albums/Details/5
@@ -64,7 +64,7 @@ namespace MusicApp2017.Controllers
             var albumView = new AlbumViewModel(album);
             albumView.Count = GetRatingCount(album.AlbumID);
             albumView.Score = GetAverageAlbumRating(album.AlbumID);
-            if (album == null)
+            if (albumView == null)
             {
                 return NotFound();
             }
@@ -83,11 +83,15 @@ namespace MusicApp2017.Controllers
 
             var rating = new Rating { AlbumID = id.Value, Score = albumView.Score };
             _context.Add(rating);
+            
 
             await _context.SaveChangesAsync();
             albumView = new AlbumViewModel(album);
             albumView.Score = GetAverageAlbumRating(album.AlbumID);
             albumView.Count = GetRatingCount(album.AlbumID);
+            album.AvgRating = GetAverageAlbumRating(album.AlbumID);
+            _context.Update(album);
+            await _context.SaveChangesAsync();
 
             return View("Details", albumView);
         }

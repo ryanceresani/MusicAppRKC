@@ -53,7 +53,7 @@
     <form method="post" class="form-inline" asp-controller="Albums" asp-action="Review" asp-route-id="@Model.AlbumID">
         <input type="hidden" name="AlbumID">
         <div class="form-group">
-            <label for="score" class="control-label">Rate this album: </label>
+            <label asp-for="Score" class="control-label">Rate this album: </label>
             <select asp-for="Score" class="form-control input-sm">
                 <option>1</option>
                 <option>2</option>

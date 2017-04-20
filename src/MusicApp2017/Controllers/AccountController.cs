@@ -111,8 +111,9 @@ namespace MusicApp2017.Controllers
                 }
                 AddErrors(result);
             }
-
+            
             // If we got this far, something failed, redisplay form
+            ViewData["GenreID"] = new SelectList(_context.Genres, "GenreID", "Name");
             return View(model);
         }
 

@@ -30,7 +30,6 @@ namespace MusicApp2017.Controllers
             _context = context;
          }
 
-        //
         // GET: /Account/Login
         [HttpGet]
         [AllowAnonymous]

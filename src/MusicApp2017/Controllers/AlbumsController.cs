@@ -57,14 +57,38 @@ namespace MusicApp2017.Controllers
             var albumContext =  _context.Albums
                 .Include(a => a.Artist)
                 .Include(a => a.Genre);
+
             var album = await albumContext
                 .SingleOrDefaultAsync(m => m.AlbumID == id);
+
+            var albumView = new AlbumViewModel(album);
+            albumView.Count = GetRatingCount(album.AlbumID);
+            albumView.Score = GetAverageAlbumRating(album.AlbumID);
             if (album == null)
             {
                 return NotFound();
             }
 
-            return View(album);
+            return View(albumView);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Review(int? id, AlbumViewModel albumView)
+        {
+            var albumContext = _context.Albums
+                .Include(a => a.Artist)
+                .Include(a => a.Genre);
+            var album = await albumContext
+                .SingleOrDefaultAsync(m => m.AlbumID == id);
+
+            var rating = new Rating { AlbumID = id.Value, Score = albumView.Score };
+            _context.Add(rating);
+
+            await _context.SaveChangesAsync();
+
+            albumView.Score = GetAverageAlbumRating(album.AlbumID);
+
+            return View("Details", albumView);
         }
 
         // GET: Albums/Create
@@ -188,6 +212,33 @@ namespace MusicApp2017.Controllers
         private bool AlbumExists(int id)
         {
             return _context.Albums.Any(e => e.AlbumID == id);
+        }
+
+        private decimal GetAverageAlbumRating(int AlbumID)
+        {
+            try
+            {
+                var rating = _context.Ratings.Where(a => a.AlbumID == AlbumID).Average(r => r.Score);
+                return Math.Round(rating,1);
+            }
+            catch (Exception e)
+            {
+                var detail = e;
+                return 0;
+            }
+        }
+        private int GetRatingCount(int AlbumID)
+        {
+            try
+            {
+                var count = _context.Ratings.Count(a => a.AlbumID == AlbumID);
+                return count;
+            }
+            catch (Exception e)
+            {
+                var detail = e;
+                return 0;
+            }
         }
     }
 }

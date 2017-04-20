@@ -23,6 +23,7 @@ namespace MusicApp2017.Models
         // Navigation property
         public Genre Genre { get; set; }
 
+        [Display(Name = "Rating")]
         public decimal AvgRating { get; set; }
     }
 }

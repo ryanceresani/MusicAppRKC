@@ -29,8 +29,16 @@ namespace MusicApp2017.Controllers
             {
                 var user = await _userManager.GetUserAsync(User);
                 ViewData["FavoriteGenreName"] = _context.Genres.SingleOrDefault(g => g.GenreID == user.FavoriteGenre).Name;
-                var musicDbContext = _context.Albums.Include(a => a.Artist).Include(a => a.Genre).Where(a => a.GenreID == user.FavoriteGenre);  
-                return View(await musicDbContext.ToListAsync());
+                if (user.FavoriteGenre != null)
+                {
+                    var musicDbContext = _context.Albums.Include(a => a.Artist).Include(a => a.Genre).Where(a => a.GenreID == user.FavoriteGenre);
+                    return View(await musicDbContext.ToListAsync());
+                }
+                else
+                { 
+                    var musicDbContext = _context.Albums.Include(a => a.Artist).Include(a => a.Genre);
+                    return View("DisplayAll", await musicDbContext.ToListAsync());
+                }
             }
             else
             {

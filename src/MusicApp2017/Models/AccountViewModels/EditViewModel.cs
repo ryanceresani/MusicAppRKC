@@ -14,6 +14,6 @@ namespace MusicApp2017.Models.AccountViewModels
         public string Email { get; set; }
 
         [Display(Name = "Favorite Genre")]
-        public int FavoriteGenre { get; set; }
+        public int? FavoriteGenre { get; set; }
     }
 }

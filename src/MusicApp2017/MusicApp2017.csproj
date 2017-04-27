@@ -8,10 +8,20 @@
     <PackageTargetFallback>$(PackageTargetFallback);portable-net45+win8+wp8+wpa81;</PackageTargetFallback>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="wwwroot\app\app.component.ts" />
+    <Content Include="wwwroot\app\app.module.ts" />
+    <Content Include="wwwroot\favicon.ico" />
+    <Content Include="wwwroot\index.html" />
     <Content Include="wwwroot\lib\bootstrap\dist\css\bootstrap-theme.css" />
     <Content Include="wwwroot\lib\bootstrap\dist\css\bootstrap-theme.css.map" />
     <Content Include="wwwroot\lib\bootstrap\dist\css\bootstrap.css" />
     <Content Include="wwwroot\lib\bootstrap\dist\css\bootstrap.css.map" />
+    <Content Include="wwwroot\main.ts" />
+    <Content Include="wwwroot\package.json" />
+    <Content Include="wwwroot\styles.css" />
+    <Content Include="wwwroot\systemjs-angular-loader.js" />
+    <Content Include="wwwroot\systemjs.config.js" />
+    <Content Include="wwwroot\tsconfig.json" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="1.1.1" />

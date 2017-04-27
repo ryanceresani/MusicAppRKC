@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using MusicApp2017.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
 
 namespace MusicApp2017
 {
@@ -67,6 +68,7 @@ namespace MusicApp2017
                 app.UseExceptionHandler("/Home/Error");
             }
 
+            app.UseDefaultFiles();
             app.UseStaticFiles();
             app.UseIdentity();
             app.UseMvc(routes =>
@@ -74,6 +76,13 @@ namespace MusicApp2017
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
+            });
+
+            app.Run(async context =>
+            {
+                context.Response.StatusCode = 200;
+                context.Response.ContentType = "text/html";
+                await context.Response.SendFileAsync("./wwwroot/index.html");
             });
         }
     }

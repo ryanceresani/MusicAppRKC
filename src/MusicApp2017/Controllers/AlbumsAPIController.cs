@@ -10,7 +10,7 @@ using MusicApp2017.Models;
 namespace MusicApp2017.Controllers
 {
     [Produces("application/json")]
-    [Route("api/AlbumsAPI")]
+    [Route("api/Albums")]
     public class AlbumsAPIController : Controller
     {
         private readonly MusicDbContext _context;
@@ -24,7 +24,7 @@ namespace MusicApp2017.Controllers
         [HttpGet]
         public IEnumerable<Album> GetAlbums()
         {
-            return _context.Albums;
+            return _context.Albums.Include(a => a.Artist).Include(a => a.Genre);
         }
 
         // GET: api/AlbumsAPI/5

@@ -17,7 +17,6 @@
             @Model.Title
         </dd>
         <dd>
-            @Model.Likes
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Artist)
@@ -35,8 +34,8 @@
     
     <form asp-action="Delete">
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            <a asp-action="Index">Back to List</a>
+            <input type="submit" value="Delete" class="btn btn-danger" />
+            <a class="btn btn-primary" asp-action="Index">Back to List</a>
         </div>
     </form>
 </div>

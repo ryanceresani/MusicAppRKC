@@ -1,4 +1,4 @@
-@model MusicApp2017.Models.Album
+@model MusicApp2017.Models.AlbumViewModel
 
 @{
     ViewData["Title"] = "Details";
@@ -36,7 +36,36 @@
         <dd>
             <a asp-Controller="Genres" asp-Action="Details" asp-route-id="@Model.GenreID">@Model.Genre.Name</a>
         </dd>
+        <dt>
+            Rating
+        </dt>
+        <dd>
+            @if (Model.Score != 0)
+            {
+                @Model.Score
+            }
+            (@Model.Count Reviews)
+        </dd>
     </dl>
+</div>
+
+<div class="well">
+    <form method="post" class="form-inline" asp-controller="Albums" asp-action="Review" asp-route-id="@Model.AlbumID">
+        <input type="hidden" name="AlbumID">
+        <div class="form-group">
+            <label asp-for="Score" class="control-label">Rate this album: </label>
+            <select asp-for="Score" class="form-control input-sm">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+            </select>
+            <div class="form-group">
+                <input type="submit" value="Rate" class="btn btn-xs btn-info">
+            </div>
+        </div>
+    </form>
 </div>
 <div>
     <a class="btn btn-warning" asp-action="Edit" asp-route-id="@Model.AlbumID">Edit</a>

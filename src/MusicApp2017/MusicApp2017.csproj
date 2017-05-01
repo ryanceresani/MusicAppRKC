@@ -8,8 +8,24 @@
     <PackageTargetFallback>$(PackageTargetFallback);portable-net45+win8+wp8+wpa81;</PackageTargetFallback>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="wwwroot\node_modules\%40angular\platform-browser\**" />
+    <Content Remove="wwwroot\node_modules\%40angular\platform-browser\**" />
+    <EmbeddedResource Remove="wwwroot\node_modules\%40angular\platform-browser\**" />
+    <None Remove="wwwroot\node_modules\%40angular\platform-browser\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="wwwroot\app\app.component.js" />
+    <Content Include="wwwroot\app\app.component.js.map" />
     <Content Include="wwwroot\app\app.component.ts" />
+    <Content Include="wwwroot\app\app.module.js" />
+    <Content Include="wwwroot\app\app.module.js.map" />
     <Content Include="wwwroot\app\app.module.ts" />
+    <Content Include="wwwroot\app\app.component.html" />
+    <Content Include="wwwroot\app\navmenu\navmenu.component.css" />
+    <Content Include="wwwroot\app\navmenu\navmenu.component.html" />
+    <Content Include="wwwroot\app\navmenu\navmenu.component.js" />
+    <Content Include="wwwroot\app\navmenu\navmenu.component.js.map" />
+    <Content Include="wwwroot\app\navmenu\navmenu.component.ts" />
     <Content Include="wwwroot\favicon.ico" />
     <Content Include="wwwroot\index.html" />
     <Content Include="wwwroot\lib\bootstrap\dist\css\bootstrap-theme.css" />
@@ -24,6 +40,7 @@
     <Content Include="wwwroot\tsconfig.json" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="AngularJS.Core" Version="1.6.4" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="1.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="1.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics" Version="1.1.1" />

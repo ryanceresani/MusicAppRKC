@@ -35,7 +35,6 @@ export class AddAlbumComponent {
     toggleForm() {
         this.showForm = !this.showForm;
     }
-
 }
 
 interface Artist{
@@ -52,9 +51,7 @@ class Album {
     constructor(private albumID: number = 0,
         public title: string = null,
         public artistID: number = 0,
-        public artist: Artist = null,
         public genreID: number = 0,
-        public genre: Genre = null,
         public avgRating: number = 0,
     ) { }
 }

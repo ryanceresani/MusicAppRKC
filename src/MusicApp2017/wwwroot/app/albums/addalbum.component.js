@@ -45,20 +45,16 @@ AddAlbumComponent = __decorate([
 ], AddAlbumComponent);
 exports.AddAlbumComponent = AddAlbumComponent;
 var Album = (function () {
-    function Album(albumID, title, artistID, artist, genreID, genre, avgRating) {
+    function Album(albumID, title, artistID, genreID, avgRating) {
         if (albumID === void 0) { albumID = 0; }
         if (title === void 0) { title = null; }
         if (artistID === void 0) { artistID = 0; }
-        if (artist === void 0) { artist = null; }
         if (genreID === void 0) { genreID = 0; }
-        if (genre === void 0) { genre = null; }
         if (avgRating === void 0) { avgRating = 0; }
         this.albumID = albumID;
         this.title = title;
         this.artistID = artistID;
-        this.artist = artist;
         this.genreID = genreID;
-        this.genre = genre;
         this.avgRating = avgRating;
     }
     return Album;

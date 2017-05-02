@@ -26,8 +26,8 @@ AppModule = __decorate([
         imports: [platform_browser_1.BrowserModule, http_1.HttpModule, http_1.JsonpModule, forms_1.FormsModule, router_1.RouterModule.forRoot([
                 { path: '', redirectTo: 'home', pathMatch: 'full' },
                 { path: 'home', component: home_component_1.HomeComponent },
-                { path: 'albums', component: albumList_component_1.AlbumListComponent },
-                { path: 'albums/:id', component: album_component_1.AlbumComponent },
+                { path: 'album', component: albumList_component_1.AlbumListComponent },
+                { path: 'album/:id', component: album_component_1.AlbumComponent },
                 { path: '**', redirectTo: 'home' }
             ])],
         declarations: [app_component_1.AppComponent, home_component_1.HomeComponent, navmenu_component_1.NavMenuComponent, albumList_component_1.AlbumListComponent, album_component_1.AlbumComponent, addalbum_component_1.AddAlbumComponent],

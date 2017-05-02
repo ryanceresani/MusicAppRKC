@@ -5,7 +5,7 @@
 <div *ngIf="showForm">
     <form (ngSubmit)="onSubmit()" #f="ngForm">
         <div class="form-horizontal">
-            <h4>Album</h4>
+            <h4>Add Album</h4>
             <hr />
             <div class="form-group">
                 <label class="control-label col-md-2" for="title">Title</label>
@@ -22,35 +22,29 @@
                     </div>
                 </div>
             </div>
-
             <div class="form-group">
                 <label class="control-label col-md-2" for="artist">Artist</label>
                 <div class="col-md-10">
-                    <select [(ngModel)]="model.artistID" name="artistID" id="artistID" class="form-control" ng-options="artist.artistID for artist in artists"></select>
+                    <select [(ngModel)]="model.artistID" name="artistID" id="artistID" class="form-control" required>
+                        <option *ngFor="let artist of artists" value="{{artist.artistID}}">{{artist.name}}</option>
+                    </select>
                 </div>
             </div>
-
             <div class="form-group">
                 <label class="control-label col-md-2" for="genre">Genre</label>
                 <div class="col-md-10">
-                    <select [(ngModel)]="model.genre" name="genre" id="genre" class="form-control" ng-options="genre as genre.name for genre in genres"></select>
+                    <select [(ngModel)]="model.genreID" name="genreID" id="genreID" class="form-control" required>
+                        <option *ngFor="let genre of genres" value="{{genre.genreID}}">{{genre.name}}</option>
+                    </select>
                 </div>
-            </div>
-            <div class="text-info">
-                <span *ngFor="let genre of genres"> {{genre.name}} </span>
-            </div>
-            <div class="text-info">
-                <span *ngFor="let artist of artists"> {{artist.name}} </span>
             </div>
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
                     <button type="submit" class="btn btn-info"
-                            [disabled]="!f.form.valid">
-                        Save
+                            [disabled]="!f.form.valid"> Save
                     </button>
                 </div>
             </div>
         </div>
     </form>
-
 </div>

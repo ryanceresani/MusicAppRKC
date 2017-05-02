@@ -16,8 +16,8 @@ import { AddAlbumComponent } from './albums/addalbum.component';
     imports: [BrowserModule, HttpModule, JsonpModule, FormsModule, RouterModule.forRoot([
         { path: '', redirectTo: 'home', pathMatch: 'full' },
         { path: 'home', component: HomeComponent },
-        { path: 'albums', component: AlbumListComponent },
-        { path: 'albums/:id', component: AlbumComponent },
+        { path: 'album', component: AlbumListComponent },
+        { path: 'album/:id', component: AlbumComponent },
         { path: '**', redirectTo: 'home' }
     ])],
     declarations: [AppComponent, HomeComponent, NavMenuComponent, AlbumListComponent, AlbumComponent, AddAlbumComponent], 

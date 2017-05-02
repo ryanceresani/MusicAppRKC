@@ -83,7 +83,7 @@ namespace MusicApp2017.Controllers
             return NoContent();
         }
 
-        // POST: api/AlbumsAPI
+        // POST: api/Albums
         [HttpPost]
         public async Task<IActionResult> PostAlbum([FromBody] Album album)
         {
@@ -93,8 +93,21 @@ namespace MusicApp2017.Controllers
             }
 
             _context.Albums.Add(album);
-            await _context.SaveChangesAsync();
-
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException)
+            {
+                if (AlbumExists(album.AlbumID))
+                {
+                    return new StatusCodeResult(StatusCodes.Status409Conflict);
+                }
+                else
+                {
+                    throw;
+                }
+            }
             return CreatedAtAction("GetAlbum", new { id = album.AlbumID }, album);
         }
 

@@ -13,6 +13,9 @@ var forms_1 = require("@angular/forms");
 var app_component_1 = require("./app.component");
 var navmenu_component_1 = require("./navmenu/navmenu.component");
 var home_component_1 = require("./home/home.component");
+var albumList_component_1 = require("./albums/albumList.component");
+var album_component_1 = require("./albums/album.component");
+var addalbum_component_1 = require("./albums/addalbum.component");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -23,8 +26,11 @@ AppModule = __decorate([
         imports: [platform_browser_1.BrowserModule, http_1.HttpModule, http_1.JsonpModule, forms_1.FormsModule, router_1.RouterModule.forRoot([
                 { path: '', redirectTo: 'home', pathMatch: 'full' },
                 { path: 'home', component: home_component_1.HomeComponent },
+                { path: 'albums', component: albumList_component_1.AlbumListComponent },
+                { path: 'albums/:id', component: album_component_1.AlbumComponent },
+                { path: '**', redirectTo: 'home' }
             ])],
-        declarations: [app_component_1.AppComponent, home_component_1.HomeComponent, navmenu_component_1.NavMenuComponent],
+        declarations: [app_component_1.AppComponent, home_component_1.HomeComponent, navmenu_component_1.NavMenuComponent, albumList_component_1.AlbumListComponent, album_component_1.AlbumComponent, addalbum_component_1.AddAlbumComponent],
         bootstrap: [app_component_1.AppComponent]
     })
 ], AppModule);

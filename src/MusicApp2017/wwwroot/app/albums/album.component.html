@@ -1,0 +1,15 @@
+﻿<h1>Album Details</h1>
+
+<p *ngIf="!album"><em>Loading album...</em></p>
+
+<div *ngIf="album">
+    <div>Album Title: {{album.title}}</div>
+
+    <div>Artist: {{album.artist.name}}</div>
+
+    <div>Genre: {{album.genre.name}}</div>
+
+    <div *ngIf="album.avgRating != 0">Average Rating: {{album.avgRating | number: '1.1-1'}}</div>
+    <div *ngIf="album.avgRating == 0">Average Rating: Unrated </div>
+
+</div>

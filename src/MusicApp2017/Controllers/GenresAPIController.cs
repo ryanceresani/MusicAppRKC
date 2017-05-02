@@ -10,59 +10,57 @@ using MusicApp2017.Models;
 namespace MusicApp2017.Controllers
 {
     [Produces("application/json")]
-    [Route("api/albums")]
-    public class AlbumsAPIController : Controller
+    [Route("api/genres")]
+    public class GenresAPIController : Controller
     {
         private readonly MusicDbContext _context;
 
-        public AlbumsAPIController(MusicDbContext context)
+        public GenresAPIController(MusicDbContext context)
         {
             _context = context;
         }
 
-        // GET: api/AlbumsAPI
+        // GET: api/GenresAPI
         [HttpGet]
-        public IEnumerable<Album> GetAlbums()
+        public IEnumerable<Genre> GetGenres()
         {
-            return _context.Albums.Include(a => a.Artist).Include(a => a.Genre);
+            return _context.Genres;
         }
 
-        // GET: api/AlbumsAPI/5
+        // GET: api/GenresAPI/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetAlbum([FromRoute] int id)
+        public async Task<IActionResult> GetGenre([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var album = await _context.Albums.SingleOrDefaultAsync(m => m.AlbumID == id);
-            album.Genre = await _context.Genres.SingleOrDefaultAsync(g => g.GenreID == album.GenreID);
-            album.Artist = await _context.Artists.SingleOrDefaultAsync(a => a.ArtistID == album.ArtistID);
+            var genre = await _context.Genres.SingleOrDefaultAsync(m => m.GenreID == id);
 
-            if (album == null)
+            if (genre == null)
             {
                 return NotFound();
             }
 
-            return Ok(album);
+            return Ok(genre);
         }
 
-        // PUT: api/AlbumsAPI/5
+        // PUT: api/GenresAPI/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAlbum([FromRoute] int id, [FromBody] Album album)
+        public async Task<IActionResult> PutGenre([FromRoute] int id, [FromBody] Genre genre)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != album.AlbumID)
+            if (id != genre.GenreID)
             {
                 return BadRequest();
             }
 
-            _context.Entry(album).State = EntityState.Modified;
+            _context.Entry(genre).State = EntityState.Modified;
 
             try
             {
@@ -70,7 +68,7 @@ namespace MusicApp2017.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!AlbumExists(id))
+                if (!GenreExists(id))
                 {
                     return NotFound();
                 }
@@ -83,45 +81,45 @@ namespace MusicApp2017.Controllers
             return NoContent();
         }
 
-        // POST: api/AlbumsAPI
+        // POST: api/GenresAPI
         [HttpPost]
-        public async Task<IActionResult> PostAlbum([FromBody] Album album)
+        public async Task<IActionResult> PostGenre([FromBody] Genre genre)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _context.Albums.Add(album);
+            _context.Genres.Add(genre);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetAlbum", new { id = album.AlbumID }, album);
+            return CreatedAtAction("GetGenre", new { id = genre.GenreID }, genre);
         }
 
-        // DELETE: api/AlbumsAPI/5
+        // DELETE: api/GenresAPI/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAlbum([FromRoute] int id)
+        public async Task<IActionResult> DeleteGenre([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var album = await _context.Albums.SingleOrDefaultAsync(m => m.AlbumID == id);
-            if (album == null)
+            var genre = await _context.Genres.SingleOrDefaultAsync(m => m.GenreID == id);
+            if (genre == null)
             {
                 return NotFound();
             }
 
-            _context.Albums.Remove(album);
+            _context.Genres.Remove(genre);
             await _context.SaveChangesAsync();
 
-            return Ok(album);
+            return Ok(genre);
         }
 
-        private bool AlbumExists(int id)
+        private bool GenreExists(int id)
         {
-            return _context.Albums.Any(e => e.AlbumID == id);
+            return _context.Genres.Any(e => e.GenreID == id);
         }
     }
 }

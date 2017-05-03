@@ -1,0 +1,53 @@
+﻿<button (click)="toggleForm()" class="btn btn-info btn-lg" *ngIf="!showForm">
+    Edit Album
+</button>
+
+<div *ngIf="showForm">
+    <form (ngSubmit)="onSubmit()" #f="ngForm">
+        <div class="form-horizontal">
+            <h4>Edit Album</h4>
+            <hr />
+            <div class="form-group">
+                <label class="control-label col-md-2" for="title">Title</label>
+                <div class="col-md-10">
+                    <input type="text" id="title" class="form-control"
+                           [(ngModel)]="model.title" name="title"
+                           #name="ngModel" value="model.title"
+                           required />
+                    <div *ngIf="name.errors && name.touched"
+                         class="alert alert-danger">
+                        <div [hidden]="!name.errors.required">
+                            Title is required
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2" for="artist">Artist</label>
+                <div class="col-md-10">
+                    <select [(ngModel)]="model.artistID" name="artistID" id="artistID" class="form-control" required>
+                        <option ng-selected="model.artistID">{{model.artist.name}}</option>
+                        <option *ngFor="let artist of artists" value="{{artist.artistID}}">{{artist.name}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2" for="genre">Genre</label>
+                <div class="col-md-10">
+                    <select [(ngModel)]="model.genreID" name="genreID" id="genreID" class="form-control" required>
+                        <option ng-selected="model.genreID">{{model.genre.name}}</option>
+                        <option *ngFor="let genre of genres" value="{{genre.genreID}}">{{genre.name}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <button type="submit" class="btn btn-info"
+                            [disabled]="!f.form.valid">
+                        Save
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

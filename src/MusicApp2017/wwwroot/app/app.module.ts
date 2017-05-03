@@ -10,6 +10,7 @@ import { HomeComponent } from './home/home.component';
 import { AlbumListComponent } from './albums/albumList.component';
 import { AlbumComponent } from './albums/album.component';
 import { AddAlbumComponent } from './albums/addalbum.component';
+import { EditAlbumComponent } from './albums/editalbum.component';
 
 
 @NgModule({
@@ -20,7 +21,7 @@ import { AddAlbumComponent } from './albums/addalbum.component';
         { path: 'album/:id', component: AlbumComponent },
         { path: '**', redirectTo: 'home' }
     ])],
-    declarations: [AppComponent, HomeComponent, NavMenuComponent, AlbumListComponent, AlbumComponent, AddAlbumComponent], 
+    declarations: [AppComponent, HomeComponent, NavMenuComponent, AlbumListComponent, AlbumComponent, AddAlbumComponent, EditAlbumComponent], 
   bootstrap:    [ AppComponent ]
 })
 export class AppModule { }

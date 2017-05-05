@@ -14,8 +14,12 @@
     <Content Include="wwwroot\app\albums\albumlist.component.html" />
     <Content Include="wwwroot\app\albums\albumlist.component.ts" />
     <Content Include="wwwroot\app\albums\album.component.ts" />
+    <Content Include="wwwroot\app\albums\deletealbum.component.html" />
+    <Content Include="wwwroot\app\albums\deletealbum.component.ts" />
     <Content Include="wwwroot\app\albums\editalbum.component.html" />
     <Content Include="wwwroot\app\albums\editalbum.component.ts" />
+    <Content Include="wwwroot\app\albums\F.ts" />
+    <Content Include="wwwroot\app\albums\htmlpage.html" />
     <Content Include="wwwroot\app\app.component.html" />
     <Content Include="wwwroot\app\app.component.js" />
     <Content Include="wwwroot\app\app.component.js.map" />

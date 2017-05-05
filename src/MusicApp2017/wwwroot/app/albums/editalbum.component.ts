@@ -32,9 +32,8 @@ export class EditAlbumComponent {
 
     onSubmit(form: NgForm, route: ActivatedRoute) {
         let headers = new Headers();
-        var id = route.snapshot.params['id'];
         headers.append('Content-Type', 'application/json');
-        this.http.put('/api/albums/' + id, JSON.stringify(this.model), { headers: headers }).subscribe(res => this.postResponse= res.json());
+        this.http.put('/api/albums/' + this.id, JSON.stringify(this.model), { headers: headers }).subscribe(res => this.postResponse= res.json());
         form.reset();
         this.showForm = !this.showForm;
     }

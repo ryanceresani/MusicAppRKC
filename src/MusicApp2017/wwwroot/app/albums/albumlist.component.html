@@ -1,7 +1,8 @@
 ﻿<h1>Album List</h1>
 
+<input type="text" class="form-control" placeholder="Filter Albums" [(ngModel)]="query">
+<span>{{query}}</span>
 <p *ngIf="!albums"><em>Loading albums...</em></p>
-
 <table class='table' *ngIf="albums">
     <thead>
         <tr>
@@ -12,7 +13,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let album of albums">
+        <tr *ngFor="let album of albums | searchPipe:query">
             <td [routerLinkActive]="['link-active']">
                 <a [routerLink]="['/album', album.albumID]">{{ album.title }} </a>
             </td>

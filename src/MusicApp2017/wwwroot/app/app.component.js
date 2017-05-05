@@ -20,4 +20,39 @@ AppComponent = __decorate([
     })
 ], AppComponent);
 exports.AppComponent = AppComponent;
+var SearchPipe = (function () {
+    function SearchPipe() {
+    }
+    SearchPipe.prototype.transform = function (items, args) {
+        var isSearch = function (data) {
+            var isAll = false;
+            if (typeof data === 'object') {
+                for (var z in data) {
+                    if (isAll = isSearch(data[z])) {
+                        break;
+                    }
+                }
+            }
+            else {
+                if (typeof args === 'number') {
+                    isAll = data === args;
+                }
+                else {
+                    isAll = data.toString().match(new RegExp(args, 'i'));
+                }
+            }
+            return isAll;
+        };
+        return items.filter(isSearch);
+    };
+    return SearchPipe;
+}());
+SearchPipe = __decorate([
+    core_1.Pipe({
+        name: 'searchPipe',
+        pure: false
+    }),
+    core_1.Injectable()
+], SearchPipe);
+exports.SearchPipe = SearchPipe;
 //# sourceMappingURL=app.component.js.map

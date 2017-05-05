@@ -1,0 +1,6 @@
+﻿<button (click)="toggleButton()" class="btn btn-danger btn-lg" *ngIf="!showButton">
+    Delete Album
+</button>
+<button (click)="deleteAlbum()" class="btn btn-danger btn-lg" *ngIf="showButton">
+   Confirm Delete?
+</button>

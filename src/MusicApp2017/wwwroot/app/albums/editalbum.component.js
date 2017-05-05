@@ -30,9 +30,8 @@ var EditAlbumComponent = (function () {
     EditAlbumComponent.prototype.onSubmit = function (form, route) {
         var _this = this;
         var headers = new http_1.Headers();
-        var id = route.snapshot.params['id'];
         headers.append('Content-Type', 'application/json');
-        this.http.put('/api/albums/' + id, JSON.stringify(this.model), { headers: headers }).subscribe(function (res) { return _this.postResponse = res.json(); });
+        this.http.put('/api/albums/' + this.id, JSON.stringify(this.model), { headers: headers }).subscribe(function (res) { return _this.postResponse = res.json(); });
         form.reset();
         this.showForm = !this.showForm;
     };

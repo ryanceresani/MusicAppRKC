@@ -1,5 +1,6 @@
 ﻿import { Component } from '@angular/core';
 import { Http } from '@angular/http';
+import { SearchPipe } from '../app.component';
 
 @Component({
     selector: 'albumlist',
